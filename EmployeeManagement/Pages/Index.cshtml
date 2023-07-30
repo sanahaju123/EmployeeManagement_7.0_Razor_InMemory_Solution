@@ -1,0 +1,61 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Razor Page Example";
+}
+
+<h2>Submit Form</h2>
+<div class="text-right">
+    <button type="button" class="btn btn-primary" id="getEmployeesButton">Get Employees</button>
+</div>
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Salary"></label>
+        <input asp-for="Salary" class="form-control" />
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
+<table id="employeesTable" class="table" style="display: none;">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model.Employees)
+        {
+            <tr>
+                <td>@employee.EmployeeID</td>
+                <td>@employee.Salary</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+
+        $('#getEmployeesButton').click(function () {
+            $('#employeesTable').toggle();
+        });
+    </script>
+}
